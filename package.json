@@ -2,7 +2,7 @@
     "name": "ng-tether-tooltip",
     "version": "1.0.1",
     "description": "",
-    "main": "src/module.js",
+    "main": "dist/bundle.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
