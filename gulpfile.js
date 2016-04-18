@@ -17,7 +17,7 @@ gulp.task('build-min', function() {
 });
 
 gulp.task('build', function() {
-    return gulp.src("src/**/**.j")
+    return gulp.src("src/**/**.js")
         .pipe(babel())
         .pipe(gulp.dest("dist"));
 });
