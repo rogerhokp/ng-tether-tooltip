@@ -8,10 +8,14 @@ const PROPS = {
 
 const link = (scope, element, attrs) => {
 
+
+
     let opt = {
-        target: element[0],
-        content: attrs[PROPS.tooltip] || attrs[PROPS.content]
-    }
+            target: element[0],
+            content: attrs[PROPS.tooltip] || attrs[PROPS.content]
+        },
+        tooltipInstance;
+
     if (attrs[PROPS.classes]) {
         opt.classes = attrs[PROPS.classes];
     }
@@ -19,7 +23,14 @@ const link = (scope, element, attrs) => {
         opt.position = attrs[PROPS.position];
     }
 
-    let tooltipInstance = new Tooltip(opt);
+
+    scope.$watch('tooltipEnabled', enabled => {
+        if (enabled === undefined || enabled) {
+            tooltipInstance = new Tooltip(opt);
+        } else if (tooltipInstance) {
+            tooltipInstance.destroy();
+        }
+    });
 
     scope.$on('$destroy', function() {
         tooltipInstance.destroy();
@@ -29,6 +40,9 @@ const link = (scope, element, attrs) => {
 
 export default () => {
     return {
+        scope: {
+            tooltipEnabled: '<'
+        },
         restrict: 'A',
         link
     }

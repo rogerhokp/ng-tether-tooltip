@@ -13,11 +13,21 @@
 
         <link rel="stylesheet" type="text/css" href="http://github.hubspot.com/tooltip/dist/css/tooltip-theme-arrows.css">
     </head>
-    <body ng-app="test">
+    <body ng-app="test" ng-controller="TestController">
         <a href=# ng-tether-tooltip tooltip="Weeeeee" tooltip-position="top center">I'm a link!</a>
+        <a href=# ng-tether-tooltip tooltip-enabled="false" tooltip="Weeeeee" tooltip-position="top center">I'm a disabled!</a>
+        {{enabled}}
+        <a href=# ng-tether-tooltip tooltip-enabled="enabled" tooltip="Weeeeee" tooltip-position="top center">toggle enabled every 5s
+        </a>
     </div>
     <script>
-        angular.module('test', ['ng-tether-tooltip'])
+        angular.module('test', ['ng-tether-tooltip']).controller('TestController', function($scope, $interval) {
+
+            $scope.enabled = true;
+            $interval(function() {
+                $scope.enabled = !$scope.enabled;
+            }, 5000);
+        })
     </script>
 </body>
 </html>
