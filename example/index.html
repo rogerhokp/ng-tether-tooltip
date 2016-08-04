@@ -17,14 +17,16 @@
         <a href=# ng-tether-tooltip tooltip="Weeeeee" tooltip-position="top center">I'm a link!</a>
         <a href=# ng-tether-tooltip tooltip-enabled="false" tooltip="Weeeeee" tooltip-position="top center">I'm a disabled!</a>
         {{enabled}}
-        <a href=# ng-tether-tooltip tooltip-enabled="enabled" tooltip="Weeeeee" tooltip-position="top center">toggle enabled every 5s
+        <a href=# ng-tether-tooltip tooltip-enabled="enabled" tooltip="Weeeeee{{count}}" tooltip-position="top center">toggle enabled every 5s
         </a>
     </div>
     <script>
         angular.module('test', ['ng-tether-tooltip']).controller('TestController', function($scope, $interval) {
 
             $scope.enabled = true;
+            $scope.count = 0;
             $interval(function() {
+                $scope.count++;
                 $scope.enabled = !$scope.enabled;
             }, 5000);
         })
