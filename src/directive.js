@@ -9,25 +9,34 @@ const PROPS = {
 const link = (scope, element, attrs) => {
 
     let tooltipInstance, config = {};
-    angular.forEach(PROPS, prop =>
-        attrs.$observe(prop, data => config[prop] = data)
-    );
+    const getOpt = () => {
+        opt = {
+            target: element[0],
+            content: config[PROPS.tooltip] || config[PROPS.content]
+        };
+        if (config[PROPS.classes]) {
+            opt.classes = config[PROPS.classes];
+        }
+        if (config[PROPS.position]) {
+            opt.position = config[PROPS.position];
+        }
+        return opt;
+    }
+
+    angular.forEach(PROPS, prop => {
+        attrs.$observe(prop, data => config[prop] = data);
+
+        if (tooltipInstance) {
+            tooltipInstance.setOptions(getOpt())
+        }
+    });
 
     scope.$watch('tooltipEnabled', enabled => {
         if (enabled === undefined || enabled) {
-            let opt = {
-                target: element[0],
-                content: config[PROPS.tooltip] || config[PROPS.content]
-            };
-            if (config[PROPS.classes]) {
-                opt.classes = config[PROPS.classes];
-            }
-            if (config[PROPS.position]) {
-                opt.position = config[PROPS.position];
-            }
-            tooltipInstance = new Tooltip(opt);
+            tooltipInstance = new Tooltip(getOpt());
         } else if (tooltipInstance) {
             tooltipInstance.destroy();
+            tooltipInstance = null;
         }
     });
 
