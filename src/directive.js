@@ -23,13 +23,12 @@ const link = (scope, element, attrs) => {
         return opt;
     }
 
-    angular.forEach(PROPS, prop => {
-        attrs.$observe(prop, data => config[prop] = data);
-
+    angular.forEach(PROPS, prop => attrs.$observe(prop, data => {
+        config[prop] = data;
         if (tooltipInstance) {
-            tooltipInstance.setOptions(getOpt())
+            tooltipInstance.setOptions(getOpt());
         }
-    });
+    }));
 
     scope.$watch('tooltipEnabled', enabled => {
         if (enabled === undefined || enabled) {
