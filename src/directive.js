@@ -10,7 +10,7 @@ const link = (scope, element, attrs) => {
 
     let tooltipInstance, config = {};
     const getOpt = () => {
-        opt = {
+        let opt = {
             target: element[0],
             content: config[PROPS.tooltip] || config[PROPS.content]
         };
