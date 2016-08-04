@@ -26,7 +26,8 @@ const link = (scope, element, attrs) => {
     angular.forEach(PROPS, prop => attrs.$observe(prop, data => {
         config[prop] = data;
         if (tooltipInstance) {
-            tooltipInstance.setOptions(getOpt());
+            tooltipInstance.destroy();
+            tooltipInstance = new Tooltip(getOpt());
         }
     }));
 

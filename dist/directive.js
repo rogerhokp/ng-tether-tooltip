@@ -33,7 +33,8 @@ var link = function link(scope, element, attrs) {
         return attrs.$observe(prop, function (data) {
             config[prop] = data;
             if (tooltipInstance) {
-                tooltipInstance.setOptions(getOpt());
+                tooltipInstance.destroy();
+                tooltipInstance = new Tooltip(getOpt());
             }
         });
     });

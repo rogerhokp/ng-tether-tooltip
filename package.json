@@ -1,6 +1,6 @@
 {
     "name": "ng-tether-tooltip",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "",
     "main": "dist/module.js",
     "scripts": {
@@ -19,7 +19,7 @@
         "angular"
     ],
     "dependencies": {
-      "tether-tooltip": "^1.2.0"
+      "tether-tooltip": "1.2.0"
     },
     "devDependencies": {
         "angular": "^1.5.3",
