@@ -41,7 +41,9 @@ const link = (scope, element, attrs) => {
     });
 
     scope.$on('$destroy', function() {
-        tooltipInstance.destroy();
+        if (tooltipInstance) {
+            tooltipInstance.destroy();
+        }
     });
 
 }
